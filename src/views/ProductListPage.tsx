@@ -1,21 +1,31 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Pagination } from "flowbite-react";
 import { useQuery } from "@tanstack/react-query";
 
 import Card from "../components/Card";
 
 import { fetchProducts, type ProductParams } from "../helpers/fetchingHelpers";
-import { getBrandLogo } from "../helpers/generalHelpers";
 
 export default function ProductListPage() {
   const navigate = useNavigate();
 
-  const [page, setPage] = useState(1);
-  const [category, setCategory] = useState<string | undefined>();
-  const [brand, setBrand] = useState<string | undefined>();
+  const { brand, category } = useParams();
 
-  const limit = 12;
+  let filterType = "";
+  let filterValue = "";
+
+  if (brand) {
+    filterType = "brand";
+    filterValue = decodeURIComponent(brand);
+  } else if (category) {
+    filterType = "category";
+    filterValue = decodeURIComponent(category);
+  }
+
+  const [page, setPage] = useState(1);
+
+  const limit = brand ? 194 : 12;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -24,8 +34,8 @@ export default function ProductListPage() {
   const params: ProductParams = {
     limit,
     skip: (page - 1) * 12,
-    category,
-    brand,
+    // category,
+    // brand,
   };
 
   const { data } = useQuery<any>({
@@ -33,29 +43,18 @@ export default function ProductListPage() {
     queryFn: () => fetchProducts(params),
   });
 
-  const productList = useMemo(() => data?.products ?? [], [data]);
+  const productList = useMemo(
+    () =>
+      brand
+        ? data?.products?.filter((item: any) => item?.brand === brand)
+        : data?.products
+        ? data?.products
+        : [],
+    [data]
+  );
   const total = useMemo(() => data?.total ?? 0, [data]);
 
-  const brands = [
-    ...new Set(productList?.map((item: any) => item.brand).filter(Boolean)),
-  ] as string[];
-
-  const brandObjects = brands.map((brand: string) => ({
-    brand,
-    logo: getBrandLogo(brand || ""),
-  }));
-
-  console.log({ brandObjects });
-
-  // console.log(total / 12);
   const onPageChange = useCallback((page: number) => setPage(page), [page]);
-
-  // const onDetailClick = useCallback(
-  //   (id?: string) => {
-  //     navigate(`/detail/${id}`);
-  //   },
-  //   [navigate]
-  // );
 
   const totalPages = useMemo(
     () => Math.max(1, Math.ceil(total / limit)),
@@ -63,8 +62,11 @@ export default function ProductListPage() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen items-center  bg-gray-50 p-8">
-      <h1 className="text-3xl font-bold text-slate-400 mb-6">All Products</h1>
+    <div className="flex flex-col min-h-screen items-center bg-gray-50 px-12 py-10">
+      <h1 className="text-3xl font-bold text-slate-400 mb-20">
+        {" "}
+        {filterType ? `Products by ${filterValue}` : "All Products"}
+      </h1>
 
       <div className="flex flex-wrap min-h-[90vh] justify-center gap-6 w-full">
         {productList?.length > 0 &&
