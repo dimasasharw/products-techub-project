@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 const BaseLayout = lazy(() => import("../components/BaseLayout"));
 const ProductListPage = lazy(() => import("../views/ProductListPage"));
+const BrandPage = lazy(() => import("../views/BrandPage"));
 const ProductDetailPage = lazy(() => import("../views/ProductDetailPage"));
 
 const router = createBrowserRouter([
@@ -14,7 +15,11 @@ const router = createBrowserRouter([
         element: <ProductListPage />,
       },
       {
-        path: "/detail",
+        path: "/brands",
+        element: <BrandPage />,
+      },
+      {
+        path: "/detail/:id",
         element: <ProductDetailPage />,
       },
     ],
