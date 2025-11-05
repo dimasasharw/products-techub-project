@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Pagination } from "flowbite-react";
+import { Pagination, Spinner } from "flowbite-react";
 import { useQuery } from "@tanstack/react-query";
 
 import Card from "../components/Card";
 
 import { fetchProducts, type ProductParams } from "../helpers/fetchingHelpers";
+import type { ProductType } from "../types/ProductType";
 
 export default function ProductListPage() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export default function ProductListPage() {
     // brand,
   };
 
-  const { data } = useQuery<any>({
+  const { data, isLoading } = useQuery<ResultPagination<ProductType>>({
     queryKey: ["product-list", params],
     queryFn: () => fetchProducts(params),
   });
@@ -46,7 +47,7 @@ export default function ProductListPage() {
   const productList = useMemo(
     () =>
       brand
-        ? data?.products?.filter((item: any) => item?.brand === brand)
+        ? data?.products?.filter((item) => item?.brand === brand)
         : data?.products
         ? data?.products
         : [],
@@ -61,16 +62,25 @@ export default function ProductListPage() {
     [total]
   );
 
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Spinner size="xl" color="info" />
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col min-h-screen items-center bg-gray-50 px-12 py-10">
+    <div className="flex flex-col min-h-screen items-center bg-gray-50 sm:px-48 py-10">
       <h1 className="text-3xl font-bold text-slate-400 mb-20">
         {" "}
         {filterType ? `Products by ${filterValue}` : "All Products"}
       </h1>
 
       <div className="flex flex-wrap min-h-[90vh] justify-center gap-6 w-full">
-        {productList?.length > 0 &&
-          productList?.map((item: any) => (
+        {productList &&
+          productList?.length > 0 &&
+          productList?.map((item) => (
             <Card
               key={item?.id}
               item={item}
@@ -81,13 +91,11 @@ export default function ProductListPage() {
           ))}
       </div>
       <div className="flex sticky overflow-x-auto sm:justify-center bottom-0 mt-6 z-10">
-        {/* {totalPages > 0 && ( */}
         <Pagination
           currentPage={page}
           totalPages={totalPages}
           onPageChange={onPageChange}
         />
-        {/* )} */}
       </div>
     </div>
   );

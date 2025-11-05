@@ -11,12 +11,13 @@ import {
 } from "flowbite-react";
 
 import { fetchProductDetail } from "../helpers/fetchingHelpers";
+import type { ProductReviewType, ProductType } from "../types/ProductType";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const { data, isLoading } = useQuery<any>({
+  const { data, isLoading } = useQuery<ProductType>({
     queryKey: ["product-detail", id],
     queryFn: () => fetchProductDetail(Number(id)),
   });
@@ -56,7 +57,7 @@ export default function ProductDetailPage() {
                   onClick={() => setSelectedImage(img)}
                   className={`w-20 h-20 bg-white rounded-xl object-cover cursor-pointer border-2 ${
                     selectedImage === img
-                      ? "border-purple-600"
+                      ? "border-red-200"
                       : "border-transparent"
                   } transition-all duration-200`}
                 />
@@ -83,15 +84,17 @@ export default function ProductDetailPage() {
                 <Badge color="success">{dataDetail?.availabilityStatus}</Badge>
               </div>
 
-              <p className="text-xl font-bold text-purple-700 mb-4">
+              <p className="text-xl font-bold text-red-200 mb-4">
                 ${dataDetail?.price}
-                <span className="text-sm text-gray-400 ml-2 line-through">
-                  $
-                  {(
-                    dataDetail?.price *
-                    (1 + dataDetail?.discountPercentage / 100)
-                  )?.toFixed(2)}
-                </span>
+                {dataDetail && (
+                  <span className="text-sm text-gray-400 ml-2 line-through">
+                    $
+                    {(
+                      (dataDetail.price ?? 0) *
+                      (1 + (dataDetail.discountPercentage ?? 0) / 100)
+                    ).toFixed(2)}
+                  </span>
+                )}
               </p>
 
               <p className="text-gray-700 mb-6 leading-relaxed">
@@ -120,7 +123,7 @@ export default function ProductDetailPage() {
                 </li>
               </ul>
 
-              <Button color="purple" className="w-full md:w-auto">
+              <Button color="pink" className="w-full md:w-auto">
                 Add to Cart
               </Button>
             </div>
@@ -135,24 +138,26 @@ export default function ProductDetailPage() {
             </h3>
 
             <div className="flex flex-wrap gap-4 items-center px-[5rem]">
-              {dataDetail?.reviews?.map((review: any, idx: number) => (
-                <Card key={idx} className="border border-gray-100 shadow-sm ">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <p className="font-semibold">{review.reviewerName}</p>
-                      <p className="text-sm text-gray-500">
-                        {new Date(review.date).toLocaleDateString()}
-                      </p>
+              {dataDetail?.reviews?.map(
+                (review: ProductReviewType, idx: number) => (
+                  <Card key={idx} className="border border-gray-100 shadow-sm ">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <p className="font-semibold">{review?.reviewerName}</p>
+                        <p className="text-sm text-gray-500">
+                          {new Date(review.date).toLocaleDateString()}
+                        </p>
+                      </div>
+                      <Rating>
+                        {[...Array(5)]?.map((_, i) => (
+                          <RatingStar key={i} filled={i < review?.rating} />
+                        ))}
+                      </Rating>
                     </div>
-                    <Rating>
-                      {[...Array(5)]?.map((_, i) => (
-                        <RatingStar key={i} filled={i < review.rating} />
-                      ))}
-                    </Rating>
-                  </div>
-                  <p className="text-gray-700 mt-2">{review.comment}</p>
-                </Card>
-              ))}
+                    <p className="text-gray-700 mt-2">{review?.comment}</p>
+                  </Card>
+                )
+              )}
             </div>
           </div>
         )}

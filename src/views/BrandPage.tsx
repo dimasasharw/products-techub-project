@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Pagination } from "flowbite-react";
 
 import Card from "../components/Card";
 import { brandObjects } from "../constants/brands";
-import { useNavigate } from "react-router-dom";
+
+import type { BrandType } from "../types/BrandType";
 
 export default function BrandPage() {
   const navigate = useNavigate();
@@ -17,11 +19,11 @@ export default function BrandPage() {
   const currentItems = brandObjects.slice(startIndex, endIndex);
 
   return (
-    <div className="flex flex-col h-full items-center  bg-gray-50 p-8">
+    <div className="flex flex-col h-[100vh] items-center bg-gray-50 p-8">
       <h1 className="text-3xl font-bold text-slate-400 mb-20">Brands</h1>
 
       <div className="flex flex-wrap justify-center gap-6 w-full">
-        {currentItems?.map((brand: any, index: number) => (
+        {currentItems?.map((brand: BrandType, index: number) => (
           <Card
             key={index}
             item={brand}
@@ -32,7 +34,6 @@ export default function BrandPage() {
         ))}
       </div>
 
-      {/* Pagination */}
       <div className="flex sticky overflow-x-auto sm:justify-center bottom-0 mt-6 z-10">
         <Pagination
           currentPage={currentPage}
