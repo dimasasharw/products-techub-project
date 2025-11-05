@@ -1,7 +1,33 @@
+# Essay Answers
+
+A. Pemahaman saya mengenai Props dengan TypeScript
+
+Props di React berfungsi untuk mengirim data dari satu komponen ke komponen lainnya. Dengan TypeScript, kita bisa menentukan tipe data dari props agar komponen lebih aman dan terkontrol. Misalnya, saat membuat komponen ProductCard, saya bisa menentukan props seperti berikut:
+
+```bash
+type ProductCardProps = {
+  title: string;
+  price: number;
+  image: string;
+};
+```
+
+Dengan cara ini, TypeScript akan membantu memastikan bahwa data yang dikirim ke komponen selalu sesuai tipe yang sudah didefinisikan. Jadi kesalahan bisa terdeteksi lebih awal saat pengembangan, bukan di runtime.
+pros-nya menjamin keamanan atau kecocokan type data serta menghindari error karena type data, cons-nya perlu setup atau definisi types yang termasuk effort lebih ketika akan mengirim/menerima data
+
+B. Pemahaman saya mengenai TanStack
+
+TanStack adalah library untuk mengelola data asynchronous di React, terutama saat mengambil data dari API.
+TanStack membantu menangani proses seperti fetching, caching, refetching, loading state, dan error handling secara otomatis.
+Dengan begitu, kita tidak perlu lagi menulis banyak useEffect atau state manual untuk setiap request API.
+Selain itu, data yang sudah di-fetch akan di-cache, jadi performa aplikasi jadi lebih cepat dan efisien.
+Dalam konteks project ini, saya menggunakan useQuery dari TanStack untuk mengambil data product, dan detail product agar manajemen datanya lebih terstruktur dan mudah di-maintain.
+pros-nya membantu interaksi dengan backend yang mudah, rapih dan otomatis dengan hook, cons-nya perlu setup lebih meski tidak serumit redux
+
 # 🛍️ Techub Products
 
 A simple React + TypeScript web app that displays a list of beauty product brands, their products, and product details.  
-This project was created as part of a technical test for **Techub**, focusing on clean code, API integration, and modern frontend practices.
+This project was created as part of a technical test for **K-style tech**, focusing on clean code, API integration, and modern frontend practices.
 
 ---
 
@@ -10,7 +36,7 @@ This project was created as part of a technical test for **Techub**, focusing on
 - **Brand list** with pagination
 - **Product list** filtered by brand
 - **Product detail page**
-- **Skeleton loading** and **data caching** using TanStack Query
+- **data loading** and **data caching** using TanStack Query
 - Built with **React + Vite + TypeScript + Tailwind CSS + Flowbite UI**
 
 ---
