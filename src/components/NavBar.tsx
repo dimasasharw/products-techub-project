@@ -21,10 +21,10 @@ export function NavBar() {
           Home
         </NavbarLink>
         <NavbarLink as={Link} href="#">
-          About
+          Home
         </NavbarLink>
-        <NavbarLink href="/">All Products</NavbarLink>
         <NavbarLink href="/brands">Brands</NavbarLink>
+        <NavbarLink href="/all-products">All Products</NavbarLink>
         <NavbarLink href="#">Categories</NavbarLink>
       </NavbarCollapse>
     </Navbar>

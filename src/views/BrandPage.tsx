@@ -2,10 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "flowbite-react";
 
-import Card from "../components/Card";
-import { brandObjects } from "../constants/brands";
+import { brandObjects } from "@/constants";
 
-import type { BrandType } from "../types/BrandType";
+import Card from "@/components/Card";
+
+import type { BrandType } from "@/types";
 
 export default function BrandPage() {
   const navigate = useNavigate();

@@ -8,7 +8,7 @@ export default function BaseLayout() {
         <NavBar />
       </nav>
 
-      <main className="h-full min-h-[100vh] p-2 sm:p-10 bg-red-200">
+      <main className="h-full overflow-x-hidden p-2 sm:p-10 bg-red-200">
         <Outlet />
       </main>
     </div>
