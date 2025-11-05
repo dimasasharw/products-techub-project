@@ -10,8 +10,9 @@ import {
   Spinner,
 } from "flowbite-react";
 
-import { fetchProductDetail } from "../helpers/fetchingHelpers";
-import type { ProductReviewType, ProductType } from "../types/ProductType";
+import { fetchProductDetail } from "@/helpers";
+
+import type { ProductReviewType, ProductType } from "@/types";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -84,7 +85,7 @@ export default function ProductDetailPage() {
                 <Badge color="success">{dataDetail?.availabilityStatus}</Badge>
               </div>
 
-              <p className="text-xl font-bold text-red-200 mb-4">
+              <p className="text-xl font-bold text-pink-600 mb-4">
                 ${dataDetail?.price}
                 {dataDetail && (
                   <span className="text-sm text-gray-400 ml-2 line-through">

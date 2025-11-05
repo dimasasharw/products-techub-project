@@ -18,7 +18,7 @@ type ProductCardProps = {
   height: number;
 };
 
-export default function ProductCard({
+export default function Card({
   item,
   onClick,
   width,
@@ -30,7 +30,7 @@ export default function ProductCard({
       className="cursor-pointer hover:shadow-lg shadow-md overflow-hidden flex flex-col"
       style={{ width: `${width}px`, height: `${height}px` }}
     >
-      <div className="w-full h-[200px] flex items-center justify-center overflow-hidden">
+      <div className="w-full h-[100%] flex items-center justify-center overflow-hidden">
         <img
           src={item?.thumbnail}
           alt={item?.title}
@@ -39,11 +39,10 @@ export default function ProductCard({
         />
       </div>
 
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex flex-col items-center justify-between h-full">
         <h5 className="text-lg font-semibold tracking-tight text-gray-900 line-clamp-2">
           {item?.title}
         </h5>
-
         {item?.price && item?.rating && (
           <div className="flex flex-col">
             <div className="flex items-center">
@@ -68,7 +67,23 @@ export default function ProductCard({
                 color="cyan"
                 onClick={(e) => e.stopPropagation()}
               >
-                Add to cart
+                <svg
+                  className="w-6 h-6 text-gray-800 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="white"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6"
+                  />
+                </svg>
               </Button>
             </div>
           </div>

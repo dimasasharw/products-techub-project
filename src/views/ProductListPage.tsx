@@ -3,10 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Pagination, Spinner } from "flowbite-react";
 import { useQuery } from "@tanstack/react-query";
 
-import Card from "../components/Card";
+import Card from "@/components/Card";
 
-import { fetchProducts, type ProductParams } from "../helpers/fetchingHelpers";
-import type { ProductType } from "../types/ProductType";
+import { fetchProducts, type ProductParams } from "@/helpers";
+
+import type { ProductType } from "@/types";
 
 export default function ProductListPage() {
   const navigate = useNavigate();
