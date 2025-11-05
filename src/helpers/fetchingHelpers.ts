@@ -19,7 +19,7 @@ export const fetchProducts = async (params?: ProductParams) => {
   return res.data;
 };
 
-export const fetchProductDetail = async (id?: number) => {
+export const fetchProductDetail = async (id: number) => {
   const res = await axios.get(`https://dummyjson.com/products/${id}`);
   return res.data;
 };
