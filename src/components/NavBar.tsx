@@ -10,7 +10,7 @@ import {
 export function NavBar() {
   return (
     <Navbar fluid rounded>
-      <NavbarBrand as={Link} href="https://flowbite-react.com">
+      <NavbarBrand as={Link}>
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
           Techub Commerce
         </span>
@@ -23,7 +23,7 @@ export function NavBar() {
         <NavbarLink as={Link} href="#">
           About
         </NavbarLink>
-        <NavbarLink href="/">Products</NavbarLink>
+        <NavbarLink href="/">All Products</NavbarLink>
         <NavbarLink href="/brands">Brands</NavbarLink>
         <NavbarLink href="#">Categories</NavbarLink>
       </NavbarCollapse>

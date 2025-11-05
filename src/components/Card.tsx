@@ -27,7 +27,7 @@ export default function ProductCard({
   return (
     <FlowbiteCard
       onClick={onClick}
-      className="cursor-pointer hover:shadow-lg shadow-md rounded-2xl overflow-hidden flex flex-col"
+      className="cursor-pointer hover:shadow-lg shadow-md overflow-hidden flex flex-col"
       style={{ width: `${width}px`, height: `${height}px` }}
     >
       <div className="w-full h-[200px] flex items-center justify-center overflow-hidden">
