@@ -27,7 +27,7 @@ export default function ProductListPage() {
 
   const [page, setPage] = useState(1);
 
-  const limit = brand ? 194 : 12;
+  const limit = brand ? 194 : 10;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -72,8 +72,8 @@ export default function ProductListPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen items-center bg-gray-50 sm:px-48 py-10">
-      <h1 className="text-3xl font-bold text-slate-400 mb-20">
+    <>
+      <h1 className="text-3xl font-bold text-gray-800 mb-20">
         {" "}
         {filterType ? `Products by ${filterValue}` : "All Products"}
       </h1>
@@ -98,6 +98,6 @@ export default function ProductListPage() {
           onPageChange={onPageChange}
         />
       </div>
-    </div>
+    </>
   );
 }
