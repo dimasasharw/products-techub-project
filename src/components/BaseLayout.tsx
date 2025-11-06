@@ -9,7 +9,7 @@ export default function BaseLayout() {
       </nav>
 
       <main className="h-full overflow-x-hidden p-2 sm:p-10 bg-red-200">
-        <div className="flex flex-col min-h-screen items-center bg-gray-50 sm:px-48 py-10">
+        <div className="flex flex-col min-h-screen items-center bg-gray-50 sm:px-18 py-10">
           <Outlet />
         </div>
       </main>
