@@ -20,7 +20,7 @@ export default function BrandPage() {
   const currentItems = brandObjects.slice(startIndex, endIndex);
 
   return (
-    <div className="flex flex-col h-[100vh] items-center bg-gray-50 p-8">
+    <div className="flex flex-col min-h-screen items-center bg-gray-50 p-8">
       <h1 className="text-3xl font-bold text-slate-400 mb-20">Brands</h1>
 
       <div className="flex flex-wrap justify-center gap-6 w-full">
