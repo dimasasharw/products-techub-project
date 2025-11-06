@@ -7,8 +7,9 @@ import {
   NavbarLink,
   NavbarToggle,
 } from "flowbite-react";
-import { fetchCategories } from "@/helpers";
 import { useQuery } from "@tanstack/react-query";
+
+import { fetchCategories } from "@/helpers";
 
 export function NavBar() {
   const { data } = useQuery<any>({
@@ -48,7 +49,6 @@ export function NavBar() {
         <NavbarLink href="/all-products" className="text-nowrap">
           All Products
         </NavbarLink>
-        {/* <NavbarLink href="#">Categories</NavbarLink> */}
       </NavbarCollapse>
     </Navbar>
   );
