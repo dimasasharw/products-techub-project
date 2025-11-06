@@ -34,7 +34,7 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <div className="container h-full w-full m-auto py-10 rounded-xl border border-solid border-slate-200 bg-white">
+    <div className="container h-full w-full m-auto p-10 rounded-xl border border-solid border-slate-200 bg-white">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left: Image Gallery */}
         <div className="flex flex-col items-center">
