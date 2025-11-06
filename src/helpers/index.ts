@@ -23,3 +23,8 @@ export const fetchProductDetail = async (id: number) => {
   const res = await axios.get(`https://dummyjson.com/products/${id}`);
   return res.data;
 };
+
+export const fetchCategories = async () => {
+  const res = await axios.get("https://dummyjson.com/products/categories");
+  return res.data;
+};
